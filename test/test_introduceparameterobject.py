@@ -10,9 +10,9 @@ class OrderServiceTest(TestCase):
         service = OrderService()
 
         service.make_order({
-            'product': 'TV',
-            'user': 'John',
-            'amount': 999.90,
+            'product_requested': 'TV',
+            'user_for_order': 'John',
+            'amount_paid': 999.90,
         })
 
         self.assertEqual(service.orders, [{
