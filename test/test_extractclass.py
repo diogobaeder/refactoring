@@ -22,11 +22,20 @@ class UserRepositoryTest(TestCase):
         ])
 
     @istest
-    def finds_active_users(self):
+    def finds_currently_active_users(self):
         repository = UserRepository()
         self.populate_database(repository)
 
-        users = sorted(repository.find_active_users())
+        users = repository.find_active_users()
 
-        self.assertEqual(len(users), 2)
+        users_names = sorted([user.name for user in users])
+        self.assertEqual(users_names, ['Nat Pryce', 'Steve Freeman'])
+
+    @istest
+    def finds_only_active_users(self):
+        repository = UserRepository()
+        self.populate_database(repository)
+
+        users = repository.find_active_users()
+
         self.assertTrue(all(user.active for user in users))
